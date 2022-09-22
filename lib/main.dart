@@ -35,6 +35,35 @@ class NotepadPage extends StatelessWidget {
                 print( 'Hamburger button clicked' );
               }
           ),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
+            child: SingleChildScrollView(
+                child: Column(
+                    children: [
+                      const TextField(
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Title'
+                        ),
+                      ),
+                      Divider(
+                        height: 10.0,
+                        color: Colors.grey[800],
+                        thickness: 0.5,
+                        endIndent: 0.0,
+                      ),
+                      const SizedBox( height: 5.0 ),
+                      const TextField(
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Content'
+                        ),
+                        maxLines: 10,
+                      ),
+                    ]
+                )
+            )
         )
     );
   }
