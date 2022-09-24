@@ -1,4 +1,68 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+
+// model
+class Page {
+  int? id;
+  final String title;
+  String? text;
+
+  Page( { this.id, required this.title, this.text } );
+
+  Map< String, dynamic > toMap() {
+    return {
+      'title': title,
+      'page_text': text,
+    };
+  }
+}
+
+class PageQuery {
+  late Database _database;
+
+  Future< Database? > get database async {
+    _database = await create();
+    return _database;
+  }
+
+  create() async {
+    return await openDatabase(
+      join( await getDatabasesPath(), 'notepad_page.db' ),
+      onCreate: ( db, version ) {
+        return db.execute(
+          '''
+            CREATE TABLE notepad_page(
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              title TEXT,
+              page_text TEXT
+            )
+          '''
+        );
+      },
+      onUpgrade: (db, oldVersion, newVersion) {},
+      version: 1,
+    );
+  }
+
+  Future< List < Page > > select() async {
+    final Database? db = await database;
+    final List< Map< String, dynamic > > rows = await db!.query( 'notepad_page' );
+    if ( rows.isEmpty ) {
+      return [];
+    }
+
+    return List.generate( rows.length, ( i ) {
+      return Page (
+        id: rows[ i ][ 'id' ],
+        title: rows[ i ][ 'title' ],
+        text: rows[ i ][ 'page_text' ],
+      );
+    } );
+  }
+}
 
 
 class NotepadPage extends StatelessWidget {
@@ -46,7 +110,7 @@ class NotepadPage extends StatelessWidget {
         tooltip: 'Save',
         child: const Icon( Icons.save ),
         onPressed: () {
-          print( 'Save button clicked' );
+
         },
       ),
     );
