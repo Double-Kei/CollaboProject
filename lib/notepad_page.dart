@@ -12,6 +12,11 @@ class Page {
 
   Page( { this.id, required this.title, this.text } );
 
+  @override
+  String toString() {
+    return 'id: $id, title: $title, text: $text';
+  }
+
   Map< String, dynamic > toMap() {
     return {
       'title': title,
@@ -47,12 +52,21 @@ class PageQuery {
     );
   }
 
+  Future< void > insert( Page page ) async {
+    final Database? db = await database;
+    page.id = await db!.insert( 'notepad_page', page.toMap() );
+
+    print( 'insert page: ' + page.toString() );
+  }
+
   Future< List < Page > > select() async {
     final Database? db = await database;
     final List< Map< String, dynamic > > rows = await db!.query( 'notepad_page' );
     if ( rows.isEmpty ) {
       return [];
     }
+
+    print( 'select all page: ' + rows.toString() );
 
     return List.generate( rows.length, ( i ) {
       return Page (
@@ -62,19 +76,55 @@ class PageQuery {
       );
     } );
   }
+
+  Future< void > update( Page page ) async {
+    final Database? db = await database;
+    await db!.update(
+      'notepad_page',
+      page.toMap(),
+      where: "id = ?",
+      whereArgs: [ page.id ],
+    );
+
+    print( 'update page: ' + page.toString() );
+  }
+
+  Future< void > delete( int id ) async {
+    final Database? db = await database;
+    await db!.delete(
+      'notepad_page',
+      where: "id = ?",
+      whereArgs: [ id ],
+    );
+
+    print( 'delete page: ' + id.toString() );
+  }
 }
 
 
-class NotepadPage extends StatelessWidget {
-  const NotepadPage( { super.key, required this.title } );
+class NotepadPage extends StatefulWidget {
+  NotepadPage( { super.key } );
 
-  final String title;
+  @override
+  _NotepadPageState createState() => _NotepadPageState();
+}
+
+
+class _NotepadPageState extends State< NotepadPage > {
+  final title = TextEditingController();
+  final text = TextEditingController();
+
+  Future< void > save() async {
+    var query = PageQuery();
+    var page = Page( title: title.text, text: text.text );
+    query.insert( page );
+  }
 
   @override
   Widget build( BuildContext context ) {
     return Scaffold(
       appBar: AppBar(
-        title: Text( title ),
+        title: const Text( 'New page' ),
         centerTitle: true,
       ),
       body: Padding(
@@ -82,8 +132,9 @@ class NotepadPage extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
                   children: [
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: title,
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Input title'
                       ),
@@ -95,8 +146,9 @@ class NotepadPage extends StatelessWidget {
                       endIndent: 0.0,
                     ),
                     const SizedBox( height: 5.0 ),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: text,
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Input content'
                       ),
@@ -110,7 +162,7 @@ class NotepadPage extends StatelessWidget {
         tooltip: 'Save',
         child: const Icon( Icons.save ),
         onPressed: () {
-
+          save();
         },
       ),
     );
