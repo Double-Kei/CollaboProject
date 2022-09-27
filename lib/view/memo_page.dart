@@ -22,6 +22,10 @@ class _MemoPageState extends State< MemoPage > {
     query.insert( memo );
   }
 
+  Future< void > delete() async {
+    // TODO: delete 작성할 곳
+  }
+
   @override
   Widget build( BuildContext context ) {
     return Scaffold(
@@ -60,12 +64,23 @@ class _MemoPageState extends State< MemoPage > {
               )
           )
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Save',
-        child: const Icon( Icons.save ),
-        onPressed: () {
-          save();
-        },
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            child: const Icon( Icons.save ),
+            onPressed: () {
+              save();
+            },
+          ),
+          const SizedBox( height: 10, ),
+          FloatingActionButton(
+            child: const Icon( Icons.delete ),
+            onPressed: () {
+              delete();
+            },
+          )
+        ],
       ),
     );
   }
