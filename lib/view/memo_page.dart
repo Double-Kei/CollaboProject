@@ -8,7 +8,7 @@ class MemoPage extends StatefulWidget {
   const MemoPage( { super.key } );
 
   @override
-  _MemoPageState createState() => _MemoPageState();
+  State< MemoPage > createState() => _MemoPageState();
 }
 
 
