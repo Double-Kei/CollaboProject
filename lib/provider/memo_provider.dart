@@ -32,7 +32,7 @@ class MemoProvider {
 
   Future< void > insert( Memo memo ) async {
     final Database? db = await database;
-    memo.id = await db!.insert( 'memo', memo.toMap() );
+    memo.id = await db!.transaction( (txn) => txn.insert( 'memo', memo.toMap() ) );
 
     print( 'insert memo. ' + memo.toString() );
   }

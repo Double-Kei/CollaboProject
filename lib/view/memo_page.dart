@@ -15,11 +15,31 @@ class MemoPage extends StatefulWidget {
 class _MemoPageState extends State< MemoPage > {
   final title = TextEditingController();
   final text = TextEditingController();
+  Memo? curMemo;
+  bool isNew = true;
 
   Future< void > save() async {
-    var query = MemoProvider();
-    var memo = Memo( title: title.text, text: text.text );
-    query.insert( memo );
+    if ( curMemo == null ) {
+      var query = MemoProvider();
+      var memo = Memo( title: title.text, text: text.text );
+      await query.insert( memo );
+
+      setState(() {
+        isNew = false;
+        curMemo = memo;
+      });
+      print( '_MemoPageState - insert memo. ' + memo.toString() );
+    } else {
+
+      setState(() {
+        curMemo?.title = title.text;
+        curMemo?.text = text.text;
+      });
+
+      var query = MemoProvider();
+      query.update( curMemo! );
+      print( '_MemoPageState - update memo. ' + curMemo.toString() );
+    }
   }
 
   Future< void > delete() async {

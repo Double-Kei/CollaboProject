@@ -1,9 +1,9 @@
 class Memo {
   int? id;
-  final String title;
+  String? title;
   String? text;
 
-  Memo( { this.id, required this.title, this.text } );
+  Memo( { this.id, this.title, this.text } );
 
   @override
   String toString() {
