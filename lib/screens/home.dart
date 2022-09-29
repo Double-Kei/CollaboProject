@@ -9,13 +9,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  final List<Widget> _tabs = const [
+    Center(child: Text("home screen"),),
+    Center(child: Text("category screen"),),
+    Center(child: Text("stores screen"),),
+    Center(child: Text("cart screen"),),
+    Center(child: Text("profile screen"),),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.black,
+        selectedItemColor: Color.fromRGBO(0, 0, 0, 1),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
         unselectedItemColor: Colors.red,
         elevation: 0,
