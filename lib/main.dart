@@ -12,7 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,  // Debug 리본삭제
-      home: HomeScreen(),
+
+      // Example : TopNavigatorBar
+      home: DefaultTabController(length: 3, child: HomeScreen()),
+      
+      // Example : BottomNavigatorBar
+      // home: HomeScreen(),
     );
   }
 }
