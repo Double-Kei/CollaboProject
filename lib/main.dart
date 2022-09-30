@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home.dart';
+import 'screens/homescreen.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());  
@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,  // Debug 리본삭제
 
       // Example : TopNavigatorBar
-      home: DefaultTabController(length: 3, child: HomeScreen()),
+      // home: DefaultTabController(length: 3, child: HomeScreen()),
       
       // Example : BottomNavigatorBar
-      // home: HomeScreen(),
+      home: CustomerHomeScreen(),
     );
   }
 }
