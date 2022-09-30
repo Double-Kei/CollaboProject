@@ -18,11 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const CupertinoSearchTextField(),
           elevation: 0,
           backgroundColor: Colors.white,
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
-              Tab(child: Text("Men", style: TextStyle(color: Colors.grey.shade600),),),
-              Tab(child: Text("Women", style: TextStyle(color: Colors.grey.shade600),),),
-              Tab(child: Text("Shoes", style: TextStyle(color: Colors.grey.shade600),),),
+              RepeatedTab(label: "Men",),
+              RepeatedTab(label: "Women",),
+              RepeatedTab(label: "Shoes",),
             ],
           ),
         ),
@@ -33,5 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ]),
       ),
     );
+  }
+}
+
+class RepeatedTab extends StatelessWidget {
+  final String label;
+  const RepeatedTab({
+    Key? key, required this.label,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Tab(child: Text(label, style: TextStyle(color: Colors.grey.shade600),),);
   }
 }
