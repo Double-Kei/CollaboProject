@@ -34,7 +34,7 @@ class MemoProvider {
     final Database? db = await database;
     memo.id = await db!.transaction( (txn) => txn.insert( 'memo', memo.toMap() ) );
 
-    print( 'insert memo. ' + memo.toString() );
+    print( 'insert memo. $memo' );
   }
 
   Future< List < Memo > > selectAll() async {
@@ -46,7 +46,7 @@ class MemoProvider {
 
     return List.generate( rows.length, ( i ) {
       Memo memo = Memo.fromMap( rows[ i ] );
-      print( 'select all. [$i] - ' + memo.toString() );
+      print( 'select all. [$i] - $memo' );
       return memo;
     } );
   }
@@ -60,17 +60,17 @@ class MemoProvider {
       whereArgs: [ memo.id ],
     );
 
-    print( 'update memo. ' + memo.toString() );
+    print( 'update memo. $memo' );
   }
 
-  Future< void > delete( int id ) async {
+  Future< void > delete( Memo memo ) async {
+    print( 'delete memo. ${memo.id}' );
+
     final Database? db = await database;
     await db!.delete(
       'memo',
       where: "id = ?",
-      whereArgs: [ id ],
+      whereArgs: [ memo.id ],
     );
-
-    print( 'delete memo. ' + id.toString() );
   }
 }

@@ -28,7 +28,6 @@ class _MemoPageState extends State< MemoPage > {
         isNew = false;
         curMemo = memo;
       });
-      print( '_MemoPageState - insert memo. ' + memo.toString() );
     } else {
 
       setState(() {
@@ -38,12 +37,19 @@ class _MemoPageState extends State< MemoPage > {
 
       var query = MemoProvider();
       query.update( curMemo! );
-      print( '_MemoPageState - update memo. ' + curMemo.toString() );
     }
   }
 
   Future< void > delete() async {
-    // TODO: delete 작성할 곳
+    if ( curMemo != null ) {
+      var query = MemoProvider();
+      await query.delete( curMemo! );
+
+      setState(() {
+        isNew = true;
+        curMemo = null;
+      });
+    }
   }
 
   @override
