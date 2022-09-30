@@ -26,6 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+        body: const TabBarView(children: [
+          Center(child: Text("Men Page in Screen"),),
+          Center(child: Text("Women Page in Screen"),),
+          Center(child: Text("Shoes Page in Screen"),),
+        ]),
       ),
     );
   }
