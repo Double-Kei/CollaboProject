@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Memo {
   int? id;
   String? title;
@@ -23,6 +25,25 @@ class Memo {
       id: map[ 'id' ],
       title: map[ 'title' ],
       text: map[ 'text' ],
+    );
+  }
+}
+
+class MemoSummary extends StatelessWidget {
+  final Memo data;
+
+  const MemoSummary( { super.key, required this.data } );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: < Widget >[
+          Text( 'id: ${data.id}  title: ${data.title}' ),
+          Text( 'text: ${data.text}' ),
+        ],
+      )
     );
   }
 }

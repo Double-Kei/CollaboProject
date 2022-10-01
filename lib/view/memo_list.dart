@@ -1,0 +1,61 @@
+import 'package:collabo_project/model/memo_model.dart';
+import 'package:collabo_project/provider/memo_provider.dart';
+
+import 'package:flutter/material.dart';
+
+
+class MemoList extends StatefulWidget {
+  const MemoList( { super.key } );
+
+  @override
+  State< MemoList > createState() => _MemoPageState();
+}
+
+
+class _MemoPageState extends State< MemoList > {
+  List< Memo > memoList = [];
+
+  List< Widget > getAllMemoList() {
+    List< Widget > memos = [];
+
+    for ( var memo in memoList ) {
+      memos.add( MemoSummary( data: memo ) );
+    }
+
+    return memos;
+  }
+
+  loadMemoList() async {
+    var query = MemoProvider();
+    var memos = await query.selectAll();
+
+    setState( () {
+      memoList = memos;
+    } );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadMemoList();
+  }
+
+  @override
+  Widget build( BuildContext context ) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text( 'nemo list' ),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: < Widget >[
+          ListView(
+            children: < Widget >[
+              ...getAllMemoList(),
+            ],
+          )
+        ],
+      )
+    );
+  }
+}
