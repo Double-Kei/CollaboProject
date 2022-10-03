@@ -1,6 +1,6 @@
 import 'package:collabo_project/model/memo_model.dart';
 import 'package:collabo_project/provider/memo_provider.dart';
-
+import 'memo_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -40,6 +40,15 @@ class _MemoPageState extends State< MemoList > {
     loadMemoList();
   }
 
+  void goEdit() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ( context ) => MemoPage()
+        )
+    );
+  }
+
   @override
   Widget build( BuildContext context ) {
     return Scaffold(
@@ -48,14 +57,28 @@ class _MemoPageState extends State< MemoList > {
         centerTitle: true,
       ),
       body: Stack(
+        // alignment: Alignment.center,
         children: < Widget >[
           ListView(
+            physics: const BouncingScrollPhysics(),
             children: < Widget >[
               ...getAllMemoList(),
             ],
-          )
+          ),
         ],
-      )
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: 'goEdit',
+            child: const Icon( Icons.add ),
+            onPressed: () {
+              goEdit();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

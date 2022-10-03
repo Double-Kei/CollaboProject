@@ -94,6 +94,7 @@ class _MemoPageState extends State< MemoPage > {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            heroTag: 'save',
             child: const Icon( Icons.save ),
             onPressed: () {
               save();
@@ -101,6 +102,7 @@ class _MemoPageState extends State< MemoPage > {
           ),
           const SizedBox( height: 10, ),
           FloatingActionButton(
+            heroTag: 'delete',
             child: const Icon( Icons.delete ),
             onPressed: () {
               delete();
