@@ -37,20 +37,23 @@ class MemoSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: < Widget >[
-            Text(
-              'id: ${data.id}  title: ${data.title}',
-              style: const TextStyle( fontSize: 20, color: Colors.black87 ),
-            ),
-            Text(
-              'text: ${data.text}',
-              style: const TextStyle( fontSize: 15, color: Colors.black45 ),
-            )
-          ],
-        )
+      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+      child: Material (
+          color: Colors.lightBlueAccent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: < Widget >[
+              Text(
+                'id: ${data.id}  title: ${data.title}',
+                style: const TextStyle( fontSize: 20, color: Colors.black87 ),
+              ),
+              Text(
+                'text: ${data.text}',
+                style: const TextStyle( fontSize: 15, color: Colors.black45 ),
+              )
+            ],
+          )
+      ),
     );
   }
 }
