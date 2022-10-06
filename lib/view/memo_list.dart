@@ -19,7 +19,7 @@ class _MemoPageState extends State< MemoList > {
     List< Widget > memos = [];
 
     for ( var memo in memoList ) {
-      memos.add( MemoSummary( data: memo ) );
+      memos.add( MemoSummary( data: memo, onEdit: goEdit, ) );
     }
 
     return memos;
@@ -40,7 +40,16 @@ class _MemoPageState extends State< MemoList > {
     loadMemoList();
   }
 
-  void goEdit() {
+  void goNewMemo() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ( context ) => MemoPage()
+        )
+    );
+  }
+
+  void goEdit( Memo memo ) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -71,10 +80,10 @@ class _MemoPageState extends State< MemoList > {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            heroTag: 'goEdit',
+            heroTag: 'goNewMemo',
             child: const Icon( Icons.add ),
             onPressed: () {
-              goEdit();
+              goNewMemo();
             },
           ),
         ],
