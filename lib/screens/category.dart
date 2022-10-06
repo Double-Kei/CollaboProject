@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/widgets/base_search.dart';
 
+
+List<ItemsData> items = [
+  ItemsData(label: "accessories"),
+  ItemsData(label: "bags"),
+  ItemsData(label: "beauty"),
+  ItemsData(label: "electronics"),
+  ItemsData(label: "home & garden"),
+  ItemsData(label: "inapp"),
+  ItemsData(label: "kids"),
+  ItemsData(label: "men"),
+  ItemsData(label: "shoes"),
+  ItemsData(label: "women"),
+];
+
+class ItemsData {
+  String label;
+  bool isSelected;
+  ItemsData({required this.label, this.isSelected = false});
+}
+
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
 
@@ -26,10 +46,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   Widget sideNavigator (Size size){
-    return Container(
+    return SizedBox(
       height: size.height * 0.8, 
       width: size.width * 0.2, 
-      color: Colors.grey.shade300,
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            for (var element in items) {
+              element.isSelected = false;
+            }
+            setState(() {
+              items[index].isSelected = true;
+            });
+          },
+          child: Container(
+            color: items[index].isSelected == true? Colors.white : Colors.grey.shade300,
+            height: 100, 
+            child: Center(child: Text(items[index].label)),
+          ),
+        );
+      }),
     );
   }
 
