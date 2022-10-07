@@ -14,7 +14,6 @@ class Memo {
 
   Map< String, dynamic > toMap() {
     return {
-      'id': id,
       'title': title,
       'text': text,
     };
@@ -32,9 +31,10 @@ class Memo {
 class MemoSummary extends StatelessWidget {
   final Memo data;
   final Function( Memo memo ) onEdit;
+  final Function( Memo memo ) onCopy;
   final Offset _tapPosition = Offset.zero;
 
-  const MemoSummary( { super.key, required this.data, required this.onEdit } );
+  const MemoSummary( { super.key, required this.data, required this.onEdit, required this.onCopy } );
 
   void showMenuList( BuildContext context ) async {
     final RenderObject? overlay = Overlay.of( context )?.context.findRenderObject();
@@ -71,6 +71,7 @@ class MemoSummary extends StatelessWidget {
         break;
       case 'copy':
         print('copy');
+        onCopy( data );
         break;
     }
   }

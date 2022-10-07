@@ -19,7 +19,7 @@ class _MemoPageState extends State< MemoList > {
     List< Widget > memos = [];
 
     for ( var memo in memoList ) {
-      memos.add( MemoSummary( data: memo, onEdit: goEdit, ) );
+      memos.add( MemoSummary( data: memo, onEdit: goEdit, onCopy: copy ) );
     }
 
     return memos;
@@ -56,6 +56,11 @@ class _MemoPageState extends State< MemoList > {
             builder: ( context ) => MemoPage()
         )
     );
+  }
+
+  Future< void > copy( Memo memo ) async {
+    var query = MemoProvider();
+    await query.insert( memo );
   }
 
   @override
