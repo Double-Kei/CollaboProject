@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/catogories/men.dart';
 import 'package:multi_store_app/widgets/base_search.dart';
 
 
@@ -111,7 +112,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
           Center(child: Text("home & garden page"),),
           Center(child: Text("inapp page"),),
           Center(child: Text("kids page"),),
-          Center(child: Text("men page"),),
+          // Center(child: Text("men page"),),
+          MenCategory(),
           Center(child: Text("shoes page"),),
           Center(child: Text("women page"),),
         ],
