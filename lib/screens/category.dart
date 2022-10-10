@@ -29,6 +29,19 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    for (var element in items) {
+      element.isSelected = false;
+    }
+    setState(() {
+      items[0].isSelected = true;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -52,22 +65,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
       child: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            for (var element in items) {
-              element.isSelected = false;
-            }
-            setState(() {
-              items[index].isSelected = true;
-            });
-          },
-          child: Container(
-            color: items[index].isSelected == true? Colors.white : Colors.grey.shade300,
-            height: 100, 
-            child: Center(child: Text(items[index].label)),
-          ),
-        );
-      }),
+          return GestureDetector(
+            onTap: () {
+              _pageController.animateToPage(index, duration: const Duration(microseconds: 100), curve: Curves.bounceInOut);
+              // _pageController.jumpToPage(index);
+              // for (var element in items) {
+              //   element.isSelected = false;
+              // }
+              // setState(() {
+              //   items[index].isSelected = true;
+              // });
+            },
+            child: Container(
+              color: items[index].isSelected == true? Colors.white : Colors.grey.shade300,
+              height: 100, 
+              child: Center(child: Text(items[index].label)),
+            ),
+          );
+        }
+      ),
     );
   }
 
@@ -76,6 +92,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
       height: size.height * 0.8, 
       width: size.width * 0.8, 
       color: Colors.white,
+      child: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          for (var element in items) {
+            element.isSelected = false;
+          }
+          setState(() {
+            items[index].isSelected = true;
+          });
+        },
+        scrollDirection: Axis.vertical,
+        children: const [
+          Center(child: Text("accessories page"),),
+          Center(child: Text("bags page"),),
+          Center(child: Text("beauty page"),),
+          Center(child: Text("electronics page"),),
+          Center(child: Text("home & garden page"),),
+          Center(child: Text("inapp page"),),
+          Center(child: Text("kids page"),),
+          Center(child: Text("men page"),),
+          Center(child: Text("shoes page"),),
+          Center(child: Text("women page"),),
+        ],
+      ),
     );
   }
 }
