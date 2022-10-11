@@ -30,51 +30,8 @@ class Memo {
 
 class MemoSummary extends StatelessWidget {
   final Memo data;
-  final Function( Memo memo ) onEdit;
-  final Function( Memo memo ) onCopy;
-  final Offset _tapPosition = Offset.zero;
 
-  const MemoSummary( { super.key, required this.data, required this.onEdit, required this.onCopy } );
-
-  void showMenuList( BuildContext context ) async {
-    final RenderObject? overlay = Overlay.of( context )?.context.findRenderObject();
-
-    final result = await showMenu(
-        context: context,
-        position: RelativeRect.fromRect(
-            Rect.fromLTWH( _tapPosition.dx, _tapPosition.dy, 30, 30 ),
-            Rect.fromLTWH( 0, 0, overlay!.paintBounds.size.width, overlay.paintBounds.size.height )
-        ),
-        items: [
-          const PopupMenuItem(
-            value: "edit",
-            child: Text( "Edit" ),
-          ),
-          const PopupMenuItem(
-            value: "delete",
-            child: Text( "Delete" ),
-          ),
-          const PopupMenuItem(
-            value: "copy",
-            child: Text( "Copy" ),
-          ),
-        ]
-    );
-
-    switch ( result ) {
-      case 'edit':
-        print('edit');
-        onEdit( data );
-        break;
-      case 'delete':
-        print('delete');
-        break;
-      case 'copy':
-        print('copy');
-        onCopy( data );
-        break;
-    }
-  }
+  const MemoSummary( { super.key, required this.data } );
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +41,6 @@ class MemoSummary extends StatelessWidget {
       child: Material(
           color: Colors.grey,
           child: InkWell(
-              onLongPress: () => showMenuList( context ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: < Widget > [

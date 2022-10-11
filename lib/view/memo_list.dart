@@ -19,7 +19,7 @@ class _MemoPageState extends State< MemoList > {
     List< Widget > memos = [];
 
     for ( var memo in memoList ) {
-      memos.add( MemoSummary( data: memo, onEdit: goEdit, onCopy: copy ) );
+      memos.add( MemoSummary( data: memo ) );
     }
 
     return memos;
