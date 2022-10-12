@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/widgets/appbar_widgets.dart';
 
 class SubCategoryProducts extends StatelessWidget {
   const SubCategoryProducts({Key? key, required this.mainCategoryName, required this.subCategoryName}) : super(key: key);
@@ -12,13 +13,8 @@ class SubCategoryProducts extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black,),
-          onPressed:() {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(subCategoryName, style: const TextStyle(color: Colors.black),),
+        leading: const AppBarBackButton(),
+        title: AppBarTitle(title: subCategoryName),
       ),
       body: Center(child: Text(mainCategoryName)),
     );

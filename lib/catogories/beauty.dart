@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
-import 'package:multi_store_app/widgets/category_widegets.dart';
+import 'package:multi_store_app/widgets/category_widgets.dart';
 
 class BeautyCategory extends StatelessWidget {
   const BeautyCategory({Key? key}) : super(key: key);
@@ -25,9 +25,9 @@ class BeautyCategory extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.68,
                       child: GridView.count(
-                        mainAxisSpacing: 70,
+                        mainAxisSpacing: 30,
                         crossAxisSpacing: 15,
-                        crossAxisCount: 3, 
+                        crossAxisCount: 2, 
                         children: List.generate(beauty.length, (index) {
                           return SubCategoryModel(
                             mainCategoryName: "beauty",

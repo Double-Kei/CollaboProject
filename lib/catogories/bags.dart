@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
-import 'package:multi_store_app/widgets/category_widegets.dart';
+import 'package:multi_store_app/widgets/category_widgets.dart';
 
 class BagsCategory extends StatelessWidget {
   const BagsCategory({Key? key}) : super(key: key);
