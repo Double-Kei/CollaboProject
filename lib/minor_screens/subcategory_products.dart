@@ -18,7 +18,7 @@ class SubCategoryProducts extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text(subCategoryName, style: TextStyle(color: Colors.black),),
+        title: Text(subCategoryName, style: const TextStyle(color: Colors.black),),
       ),
       body: Center(child: Text(mainCategoryName)),
     );

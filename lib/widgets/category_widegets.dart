@@ -24,7 +24,7 @@ class SubCategoryModel extends StatelessWidget {
             width: 65,
             child: Image(image: AssetImage(assetName)),
           ),
-          Text(subCategoryLabel)
+          Text(subCategoryLabel, style: const TextStyle(fontSize: 11),)
         ],
       ),
     );
@@ -33,6 +33,7 @@ class SubCategoryModel extends StatelessWidget {
 
 class CategoryHeader extends StatelessWidget {
   final String headerLabel;
+
   const CategoryHeader({
     Key? key, required this.headerLabel
   }) : super(key: key);
@@ -42,6 +43,39 @@ class CategoryHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(30.0),
       child: Text(headerLabel, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 1.5),),
+    );
+  }
+}
+
+const style = TextStyle(color: Colors.brown, fontSize: 16, fontWeight: FontWeight.w600, letterSpacing: 10);
+class SiderBar extends StatelessWidget {
+  final String mainCategoryName;
+
+  const SiderBar({
+    Key? key, required this.mainCategoryName
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.8,
+      width: MediaQuery.of(context).size.width * 0.05,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: Container(
+          decoration: BoxDecoration(color: Colors.brown.withOpacity(0.2), borderRadius: BorderRadius.circular(50),),
+          child: RotatedBox(
+            quarterTurns: 3, 
+            child: Row( 
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                mainCategoryName == "women" ? const Text("") : const Text("<<", style: style,),
+                Text(mainCategoryName.toUpperCase(), style: style),
+                mainCategoryName == "accessories" ? const Text("") : const Text(">>", style: style)
+              ],
+            ),),
+        ),
+      ),
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:multi_store_app/utilities/categ_list.dart';
 import 'package:multi_store_app/widgets/category_widegets.dart';
 
-class MenCategory extends StatelessWidget {
-  const MenCategory({Key? key}) : super(key: key);
+class WomenCategory extends StatelessWidget {
+  const WomenCategory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +21,19 @@ class MenCategory extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CategoryHeader(headerLabel: 'Men',),
+                    const CategoryHeader(headerLabel: 'Women',),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.68,
                       child: GridView.count(
                         mainAxisSpacing: 70,
                         crossAxisSpacing: 15,
                         crossAxisCount: 3, 
-                        children: List.generate(men.length, (index) {
+                        children: List.generate(women.length, (index) {
                           return SubCategoryModel(
-                            mainCategoryName: "men",
-                            subCategoryName: men[index],
-                            assetName: 'images/men/men$index.jpg',
-                            subCategoryLabel: men[index],
+                            mainCategoryName: "women",
+                            subCategoryName: women[index],
+                            assetName: 'images/women/women$index.jpg',
+                            subCategoryLabel: women[index],
                           );
                         }
                       ),),
@@ -46,7 +46,7 @@ class MenCategory extends StatelessWidget {
           const Positioned(
             bottom: 0,
             right: 0,
-            child: SiderBar(mainCategoryName: "men",)
+            child: SiderBar(mainCategoryName: "women",)
           )
         ],
       ),
