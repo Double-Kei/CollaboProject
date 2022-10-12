@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class Memo {
   int? id;
@@ -35,28 +36,37 @@ class MemoSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-      color: Colors.grey,
-      child: Material(
-          color: Colors.grey,
-          child: InkWell(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: < Widget > [
-                  Text(
-                    'id: ${data.id}  title: ${data.title}',
-                    style: const TextStyle( fontSize: 20, color: Colors.black87 ),
-                  ),
-                  Text(
-                    'text: ${data.text}',
-                    style: const TextStyle( fontSize: 15, color: Colors.black45 ),
-                  )
-                ],
-              )
-          )
-
+    return Slidable(
+      key: ValueKey( data.id ),
+      startActionPane: ActionPane(
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: ( context ) {},
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Delete',
+          ),
+          SlidableAction(
+            onPressed: ( context ) {},
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Edit',
+          ),
+        ],
       ),
+      child: ListTile(
+        title: Text(
+          'id: ${data.id}  title: ${data.title}',
+          style: const TextStyle( fontSize: 20, color: Colors.black87 ),
+        ),
+        subtitle: Text(
+          'text: ${data.text}',
+          style: const TextStyle( fontSize: 15, color: Colors.black45 ),
+        ),
+      )
     );
   }
 }
