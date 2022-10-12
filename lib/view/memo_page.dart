@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 
 
 class MemoPage extends StatefulWidget {
-  const MemoPage( { super.key } );
+  String pageTitle;
+  Memo? curMemo;
+
+  MemoPage( { super.key, required this.pageTitle, this.curMemo } );
 
   @override
   State< MemoPage > createState() => _MemoPageState();
@@ -13,50 +16,53 @@ class MemoPage extends StatefulWidget {
 
 
 class _MemoPageState extends State< MemoPage > {
-  final title = TextEditingController();
-  final text = TextEditingController();
-  Memo? curMemo;
-  bool isNew = true;
+  late TextEditingController title;
+  late TextEditingController text;
 
   Future< void > save() async {
-    if ( curMemo == null ) {
+    if ( widget.curMemo == null ) {
       var query = MemoProvider();
       var memo = Memo( title: title.text, text: text.text );
       await query.insert( memo );
 
       setState(() {
-        isNew = false;
-        curMemo = memo;
+        widget.curMemo = memo;
       });
     } else {
 
       setState(() {
-        curMemo?.title = title.text;
-        curMemo?.text = text.text;
+        widget.curMemo?.title = title.text;
+        widget.curMemo?.text = text.text;
       });
 
       var query = MemoProvider();
-      query.update( curMemo! );
+      query.update( widget.curMemo! );
     }
   }
 
   Future< void > delete() async {
-    if ( curMemo != null ) {
+    if ( widget.curMemo != null ) {
       var query = MemoProvider();
-      await query.delete( curMemo! );
+      await query.delete( widget.curMemo! );
 
       setState(() {
-        isNew = true;
-        curMemo = null;
+        widget.curMemo = null;
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    title = TextEditingController( text: widget.curMemo?.title );
+    text = TextEditingController( text: widget.curMemo?.text );
   }
 
   @override
   Widget build( BuildContext context ) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text( 'New memo' ),
+        title: Text( widget.pageTitle ),
         centerTitle: true,
       ),
       body: Padding(

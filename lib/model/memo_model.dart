@@ -31,8 +31,9 @@ class Memo {
 
 class MemoSummary extends StatelessWidget {
   final Memo data;
+  final Function( Memo memo ) onEdit;
 
-  const MemoSummary( { super.key, required this.data } );
+  const MemoSummary( { super.key, required this.data, required this.onEdit } );
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class MemoSummary extends StatelessWidget {
             label: 'Delete',
           ),
           SlidableAction(
-            onPressed: ( context ) {},
+            onPressed: ( context ) { onEdit( data ); },
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
             icon: Icons.delete,

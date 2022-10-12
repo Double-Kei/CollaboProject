@@ -19,7 +19,7 @@ class _MemoPageState extends State< MemoList > {
     List< Widget > memos = [];
 
     for ( var memo in memoList ) {
-      memos.add( MemoSummary( data: memo ) );
+      memos.add( MemoSummary( data: memo, onEdit: goEdit ) );
     }
 
     return memos;
@@ -44,7 +44,7 @@ class _MemoPageState extends State< MemoList > {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: ( context ) => MemoPage()
+            builder: ( context ) => MemoPage( pageTitle: 'new memo' )
         )
     );
   }
@@ -53,7 +53,7 @@ class _MemoPageState extends State< MemoList > {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: ( context ) => MemoPage()
+            builder: ( context ) => MemoPage( pageTitle: 'edit memo', curMemo: memo )
         )
     );
   }
