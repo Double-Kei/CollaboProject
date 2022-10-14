@@ -32,8 +32,9 @@ class Memo {
 class MemoSummary extends StatelessWidget {
   final Memo data;
   final Function( Memo memo ) onEdit;
+  final Function( Memo memo ) onDelete;
 
-  const MemoSummary( { super.key, required this.data, required this.onEdit } );
+  const MemoSummary( { super.key, required this.data, required this.onEdit, required this.onDelete } );
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class MemoSummary extends StatelessWidget {
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            onPressed: ( context ) {},
+            onPressed: ( context ) { onDelete( data ); },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
