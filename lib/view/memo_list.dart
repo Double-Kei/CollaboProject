@@ -55,17 +55,27 @@ class _MemoPageState extends State< MemoList > {
         MaterialPageRoute(
             builder: ( context ) => MemoPage( pageTitle: 'edit memo', curMemo: memo )
         )
+    ).then(
+        ( value ) => setState( () {} )
     );
   }
 
   Future< void > delete( Memo memo ) async {
     var query = MemoProvider();
     await query.delete( memo );
+
+    setState( () {
+      memoList.remove( memo );
+    } );
   }
 
   Future< void > copy( Memo memo ) async {
     var query = MemoProvider();
     await query.insert( memo );
+
+    setState( () {
+      memoList.add( memo );
+    } );
   }
 
   @override
