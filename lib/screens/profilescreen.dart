@@ -68,9 +68,93 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-          )
+          ),
+          const SizedBox(height: 150, child: Image(image: AssetImage("images/inapp/logo.jpg"),),),
+          const ProfileHeaderLabel(headerLabel: "  Account Info  ",),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              height: 260, 
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              child: Column(children: const [
+                RepeatedListTile(title: "Email Address", subtitle: "example@email.com", icon: Icons.email),
+                YellowDivider(),
+                RepeatedListTile(title: "Phone Number", subtitle: "+11111111", icon: Icons.phone),
+                YellowDivider(),
+                RepeatedListTile(title: "Address", subtitle: "example: 140 - st - New Gersy", icon: Icons.location_pin,),
+              ],),
+            ),
+          ),
+          const ProfileHeaderLabel(headerLabel: "  Account Settings  "),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              height: 260, 
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              child: Column(children: [
+                RepeatedListTile(title: "Edit Profile", icon: Icons.edit, onPressed:() {
+
+                },),
+                const YellowDivider(),
+                RepeatedListTile(title: "Change Password", icon: Icons.lock, onPressed:() {
+
+                },),
+                const YellowDivider(),
+                RepeatedListTile(title: "Log Out", icon: Icons.logout, onPressed:() {
+
+                },),
+              ],),
+            ),
+          ),
         ],),)
       ],),
     );
+  }
+}
+
+class YellowDivider extends StatelessWidget {
+  const YellowDivider({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(padding: EdgeInsets.symmetric(horizontal: 40), child: Divider(color: Colors.yellow, thickness: 1), );
+  }
+}
+
+class RepeatedListTile extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Function()? onPressed;
+
+  const RepeatedListTile({
+    Key? key, required this.title, this.subtitle="", required this.icon, this.onPressed
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(child: ListTile(title: Text(title), subtitle: Text(subtitle), leading: Icon(icon), onTap: onPressed,));
+  }
+}
+
+class ProfileHeaderLabel extends StatelessWidget {
+  final String headerLabel;
+
+  const ProfileHeaderLabel({
+    Key? key, required this.headerLabel
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(height: 40, child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(height: 40, width: 50, child: Divider(color: Colors.grey, thickness: 1,),),
+        Text(headerLabel, style: const TextStyle(color: Colors.grey, fontSize: 24, fontWeight: FontWeight.w600),),
+        const SizedBox(height: 40, width: 50, child: Divider(color: Colors.grey, thickness: 1,),),
+      ]
+    ),);
   }
 }
