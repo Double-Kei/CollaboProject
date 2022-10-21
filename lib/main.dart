@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/homescreen.dart';
+import 'package:multi_store_app/screens/supplier_home.dart';
+// import 'screens/homescreen.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());  
@@ -17,7 +18,9 @@ class MyApp extends StatelessWidget {
       // home: DefaultTabController(length: 3, child: HomeScreen()),
       
       // Example : BottomNavigatorBar
-      home: CustomerHomeScreen(),
+      // home: CustomerHomeScreen(),
+
+      home: SupplierHomeScreen(),
     );
   }
 }
