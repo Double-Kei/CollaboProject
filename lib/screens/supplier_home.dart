@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store_app/screens/dashboard.dart';
 import 'package:multi_store_app/screens/home.dart';
 import 'package:multi_store_app/screens/category.dart';
 import 'package:multi_store_app/screens/storescreen.dart';
@@ -17,7 +18,8 @@ class _SupplierHomeScreenState extends State<SupplierHomeScreen> {
     HomeScreen(),
     CategoryScreen(),
     StoresScreen(),
-    Center(child: Text("Dashboard"),),
+    // Center(child: Text("Dashboard"),),
+    DashboardScreen(),
     Center(child: Text("Upload"),),
   ];
 
